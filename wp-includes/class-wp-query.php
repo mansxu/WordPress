@@ -1607,7 +1607,7 @@ class WP_Query {
 		// If RAND() contains a seed value, sanitize and add to allowed keys.
 		$rand_with_seed = false;
 		if ( preg_match( '/RAND\(([0-9]+)\)/i', $orderby, $matches ) ) {
-			$orderby        = sprintf( 'RAND(%s)', (int) $matches[1] );
+			$orderby        = sprintf( 'RANDOM(%s)', (int) $matches[1] );
 			$allowed_keys[] = $orderby;
 			$rand_with_seed = true;
 		}
@@ -1632,7 +1632,7 @@ class WP_Query {
 				$orderby_clause = "{$wpdb->posts}.{$orderby}";
 				break;
 			case 'rand':
-				$orderby_clause = 'RAND()';
+				$orderby_clause = 'RANDOM()';
 				break;
 			case $primary_meta_key:
 			case 'meta_value':
